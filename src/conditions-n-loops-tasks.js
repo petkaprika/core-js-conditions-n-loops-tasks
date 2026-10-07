@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -38,8 +41,10 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const maxAB = a > b ? a : b;
+  const maxABC = maxAB > c ? maxAB : c;
+  return maxABC;
 }
 
 /**
@@ -61,8 +66,15 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -83,8 +95,13 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b > c && a + c > b && b + c > a) {
+    if (a === b || a === c || b === c) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -101,8 +118,33 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  const tens = Math.trunc(num / 10);
+  const remainder = num % 10;
+
+  if (tens === 3) {
+    result += 'XXX';
+  } else if (tens === 2) {
+    result += 'XX';
+  } else if (tens === 1) {
+    result += 'X';
+  }
+  if (remainder === 9) {
+    result += 'IX';
+  } else if (remainder >= 5) {
+    result += 'V';
+    for (let i = 5; i < remainder; i += 1) {
+      result += 'I';
+    }
+  } else if (remainder === 4) {
+    result += 'IV';
+  } else {
+    for (let i = 0; i < remainder; i += 1) {
+      result += 'I';
+    }
+  }
+  return result;
 }
 
 /**
